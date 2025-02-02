@@ -1,0 +1,217 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlkatdxwl8l3o"]
+
+[ext_resource type="Script" path="res://scripts/Main.gd" id="1_hn1cs"]
+[ext_resource type="PackedScene" uid="uid://ds7iby3eabein" path="res://scenes/Card.tscn" id="2_tnpui"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_hn1cs")
+
+[node name="CardsParent" type="Node2D" parent="."]
+
+[node name="AceOfSpades" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 1
+suit = 1
+
+[node name="TwoOfSpades" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 2
+suit = 1
+
+[node name="ThreeOfSpades" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 3
+suit = 1
+
+[node name="FourOfSpades" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 4
+suit = 1
+
+[node name="FiveOfSpades" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 5
+suit = 1
+
+[node name="SixOfSpades" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 6
+suit = 1
+
+[node name="SevenOfSpades" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 7
+suit = 1
+
+[node name="EightOfSpades" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 8
+suit = 1
+
+[node name="NineOfSpades" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 9
+suit = 1
+
+[node name="TenOfSpades" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 10
+suit = 1
+
+[node name="JackOfSpades" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 11
+suit = 1
+
+[node name="QueenOfSpades" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 12
+suit = 1
+
+[node name="KingOfSpades" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 13
+suit = 1
+
+[node name="AceOfHearts" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 1
+suit = 2
+
+[node name="TwoOfHearts" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 2
+suit = 2
+
+[node name="ThreeOfHearts" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 3
+suit = 2
+
+[node name="FourOfHearts" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 4
+suit = 2
+
+[node name="FiveOfHearts" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 5
+suit = 2
+
+[node name="SixOfHearts" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 6
+suit = 2
+
+[node name="SevenOfHearts" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 7
+suit = 2
+
+[node name="EightOfHearts" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 8
+suit = 2
+
+[node name="NineOfHearts" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 9
+suit = 2
+
+[node name="TenOfHearts" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 10
+suit = 2
+
+[node name="JackOfHearts" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 11
+suit = 2
+
+[node name="QueenOfHearts" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 12
+suit = 2
+
+[node name="KingOfHearts" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 13
+suit = 2
+
+[node name="AceOfDiamonds" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 1
+suit = 3
+
+[node name="TwoOfDiamonds" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 2
+suit = 3
+
+[node name="ThreeOfDiamonds" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 3
+suit = 3
+
+[node name="FourOfDiamonds" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 4
+suit = 3
+
+[node name="FiveOfDiamonds" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 5
+suit = 3
+
+[node name="SixOfDiamonds" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 6
+suit = 3
+
+[node name="SevenOfDiamonds" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 7
+suit = 3
+
+[node name="EightOfDiamonds" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 8
+suit = 3
+
+[node name="NineOfDiamonds" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 9
+suit = 3
+
+[node name="TenOfDiamonds" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 10
+suit = 3
+
+[node name="JackOfDiamonds" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 11
+suit = 3
+
+[node name="QueenOfDiamonds" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 12
+suit = 3
+
+[node name="KingOfDiamonds" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 13
+suit = 3
+
+[node name="AceOfClubs" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 1
+suit = 4
+
+[node name="TwoOfClubs" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 2
+suit = 4
+
+[node name="ThreeOfClubs" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 3
+suit = 4
+
+[node name="FourOfClubs" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 4
+suit = 4
+
+[node name="FiveOfClubs" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 5
+suit = 4
+
+[node name="SixOfClubs" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 6
+suit = 4
+
+[node name="SevenOfClubs" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 7
+suit = 4
+
+[node name="EightOfClubs" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 8
+suit = 4
+
+[node name="NineOfClubs" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 9
+suit = 4
+
+[node name="TenOfClubs" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 10
+suit = 4
+
+[node name="JackOfClubs" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 11
+suit = 4
+
+[node name="QueenOfClubs" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 12
+suit = 4
+
+[node name="KingOfClubs" parent="CardsParent" instance=ExtResource("2_tnpui")]
+value = 13
+suit = 4
