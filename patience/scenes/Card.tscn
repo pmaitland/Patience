@@ -10,7 +10,6 @@
 script = ExtResource("1_u7yu8")
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(25, 35)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(2.5, 3.5)
@@ -18,26 +17,29 @@ shape = SubResource("RectangleShape2D_lnio7")
 
 [node name="FrontSprite" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(25, 35)
 texture = ExtResource("2_ogtmq")
 
 [node name="BackSprite" type="Sprite2D" parent="."]
 visible = false
 texture_filter = 1
-position = Vector2(25, 35)
 texture = ExtResource("3_adtt8")
 
 [node name="ValueLabel" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = -25.0
+offset_top = -35.0
+offset_right = 15.0
+offset_bottom = -12.0
 scale = Vector2(1.24558, 1.52507)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "1"
 
 [node name="SuitLabel" type="Label" parent="."]
-offset_top = 35.0
-offset_right = 40.0
-offset_bottom = 58.0
+offset_left = -25.0
+offset_right = 15.0
+offset_bottom = 23.0
 scale = Vector2(1.25137, 1.52312)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "1"
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
