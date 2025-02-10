@@ -9,7 +9,7 @@ func _process(_delta: float):
 		var card = second_card.get_child(0)
 		second_card.remove_child(card)
 		first_card.add_child(card)
-		card.is_dragging_blocked = false
+		card.dragging_blocked = false
 	if second_card.get_child_count() == 0 and reserve_cards.get_child_count() > 0:
 		var card = reserve_cards.get_child(reserve_cards.get_child_count() - 1)
 		reserve_cards.remove_child(card)
@@ -19,7 +19,7 @@ func add_card(card: Node2D) -> void:
 	move_second_to_reserve()
 	move_first_to_second()
 	first_card.add_child(card)
-	card.is_dragging_blocked = false
+	card.dragging_blocked = false
 	card.flip()
 	
 func remove_card(card: Node2D) -> void:
@@ -32,7 +32,7 @@ func move_first_to_second():
 	if old_first_card != null:
 		first_card.remove_child(old_first_card)
 		second_card.add_child(old_first_card)
-		old_first_card.is_dragging_blocked = true
+		old_first_card.dragging_blocked = true
 
 func move_second_to_reserve():
 	var old_second_card = second_card.get_child(0) if second_card.get_child_count() > 0 else null
@@ -45,7 +45,7 @@ func move_second_to_first():
 	if old_second_card != null:
 		second_card.remove_child(old_second_card)
 		first_card.add_child(old_second_card)
-		old_second_card.is_dragging_blocked = false
+		old_second_card.dragging_blocked = false
 		
 func move_reserve_to_second():
 	var old_reserve_card = reserve_cards.get_child(reserve_cards.get_child_count()-1) if reserve_cards.get_child_count() > 0 else null

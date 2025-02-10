@@ -9,20 +9,18 @@ extends Node2D
 func _ready() -> void:
 	var new_cards: Array[Node2D] = []
 	
-	# create cards
 	for suit in range(4):
 		for value in range(13):
 			var card = card_scene.instantiate()
+			card.name = "Card%s-%s" % [suit, value]
 			card.suit = suit as Enums.Suit
 			card.value = value as Enums.Value
-			card.is_dragging_blocked = true
-			card.name = "Card%s-%s" % [suit, value]
+			card.dragging_blocked = true
 			cards.add_child(card)
-			card.flip()
 			new_cards.append(card)
+			card.flip()
 	new_cards.shuffle()
 	
-	# move cards to depots
 	for depot_number in range(depots.get_child_count()):
 		var depot = depots.get_children()[depot_number]
 		var previous_card: Node2D = null
@@ -36,10 +34,9 @@ func _ready() -> void:
 				card.parent_card = previous_card
 			previous_card = card
 			if card_count == depot_number:
-				card.is_dragging_blocked = false
+				card.dragging_blocked = false
 				card.flip()
-				
-	# move remaining cards to stock
+	
 	for card in new_cards:
 		cards.remove_child(card)
 		stock.cards.add_child(card)
