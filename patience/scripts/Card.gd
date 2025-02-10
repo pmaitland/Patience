@@ -115,10 +115,10 @@ func trigger_dragging() -> bool:
 		and !Globals.dragging_card
 		
 func can_pile_in_depot(card: Node2D) -> bool:
-	return card.value == value + 1 and (card.suit == (suit + 1) % 4 or card.suit == (suit + 3) % 4)
+	return card.in_depot and card.value == value + 1 and (card.suit == (suit + 1) % 4 or card.suit == (suit + 3) % 4)
 	
 func can_pile_in_foundation(card: Node2D) -> bool:
-	return child_card == null and card.value == value - 1 and card.suit == suit
+	return card.in_foundation and child_card == null and card.value == value - 1 and card.suit == suit
 
 func toggle_being_dragged() -> void:
 	being_dragged = !being_dragged
