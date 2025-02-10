@@ -15,7 +15,10 @@ var small_area_has_mouse: bool = false
 var dragging_blocked: bool = false
 var being_dragged: bool = false
 var last_mouse_position: Vector2 = Vector2.ZERO
+
+var returning_to_pre_drag_position: bool = false
 var pre_drag_position: Vector2 = global_position
+var post_drag_position: Vector2 = global_position
 
 var in_depot: bool = false
 var in_foundation: bool = false
@@ -56,7 +59,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	var current_mouse_position: Vector2 = get_global_mouse_position()
 	
-	if parent_card != null and !being_dragged:
+	if parent_card != null and !being_dragged and !returning_to_pre_drag_position:
 		z_index = parent_card.z_index + 1
 		global_position = Vector2(parent_card.global_position.x, parent_card.global_position.y)
 		if !parent_card.in_foundation:
@@ -84,7 +87,9 @@ func _process(_delta: float) -> void:
 						moved = true
 						break
 				if !moved:
-					global_position = pre_drag_position
+					post_drag_position = global_position
+					t = 0.0
+					returning_to_pre_drag_position = true
 			elif !colliding_depots.is_empty():
 				free_parent()
 				var new_position = colliding_depots[0].global_position
@@ -100,10 +105,22 @@ func _process(_delta: float) -> void:
 				check_moved_from_waste()
 				global_position = new_position
 			else:
-				global_position = pre_drag_position
+				post_drag_position = global_position
+				t = 0.0
+				returning_to_pre_drag_position = true
 		
 	last_mouse_position = current_mouse_position
 	
+func _physics_process(delta: float) -> void:
+	if returning_to_pre_drag_position:
+		t += delta * 10
+		if z_index < 1000:
+			z_index += 1000
+		global_position = post_drag_position.lerp(pre_drag_position, t)
+		if global_position == pre_drag_position:
+			returning_to_pre_drag_position = false
+			z_index -= 1000
+		
 func flip() -> void:
 	face_up = !face_up
 	front_sprite.visible = face_up
@@ -114,7 +131,8 @@ func flip() -> void:
 func trigger_dragging() -> bool:
 	return (small_area_has_mouse or (full_area_has_mouse and child_card == null)) \
 		and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
-		and !dragging_blocked\
+		and !dragging_blocked \
+		and !returning_to_pre_drag_position \
 		and !Globals.dragging_card
 		
 func can_pile_in_depot(card: Node2D) -> bool:
