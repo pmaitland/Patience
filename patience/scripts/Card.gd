@@ -10,7 +10,8 @@ var suit: Enums.Suit
 
 var face_up: bool = true
 
-var has_mouse: bool = false
+var full_area_has_mouse: bool = false
+var small_area_has_mouse: bool = false
 var dragging_blocked: bool = false
 var being_dragged: bool = false
 var last_mouse_position: Vector2 = Vector2.ZERO
@@ -109,7 +110,7 @@ func flip() -> void:
 	back_sprite.visible = !face_up
 	
 func trigger_dragging() -> bool:
-	return has_mouse \
+	return (small_area_has_mouse or (full_area_has_mouse and child_card == null)) \
 		and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
 		and !dragging_blocked\
 		and !Globals.dragging_card
@@ -147,11 +148,17 @@ func check_moved_from_waste() -> void:
 		get_parent().get_parent().remove_card(self)
 		cards.add_child(self)
 
-func _on_area_2d_mouse_entered() -> void:
-	has_mouse = true
+func _on_full_area_mouse_entered() -> void:
+	full_area_has_mouse = true
 
-func _on_area_2d_mouse_exited() -> void:
-	has_mouse = false
+func _on_full_area_mouse_exited() -> void:
+	full_area_has_mouse = false
+	
+func _on_small_area_mouse_entered() -> void:
+	small_area_has_mouse = true
+
+func _on_small_area_mouse_exited() -> void:
+	small_area_has_mouse = false
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if !being_dragged: return

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://ds7iby3eabein"]
+[gd_scene load_steps=6 format=3 uid="uid://ds7iby3eabein"]
 
 [ext_resource type="Script" path="res://scripts/card.gd" id="1_u7yu8"]
 [ext_resource type="Texture2D" uid="uid://bplon4im6i5q6" path="res://sprites/card_front.png" id="2_ogtmq"]
@@ -6,14 +6,24 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lnio7"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3nmts"]
+size = Vector2(50, 20)
+
 [node name="Card" type="Node2D"]
 script = ExtResource("1_u7yu8")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="FullArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FullArea"]
+position = Vector2(1.90735e-06, 2.38419e-07)
 scale = Vector2(2.5, 3.5)
 shape = SubResource("RectangleShape2D_lnio7")
+
+[node name="SmallArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallArea"]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_3nmts")
 
 [node name="FrontSprite" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -37,16 +47,18 @@ vertical_alignment = 1
 
 [node name="SuitLabel" type="Label" parent="."]
 offset_left = -12.0
-offset_top = -35.0
+offset_top = -34.0
 offset_right = 28.0
-offset_bottom = -12.0
+offset_bottom = -11.0
 scale = Vector2(1.25137, 1.52312)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="area_entered" from="FullArea" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="FullArea" to="." method="_on_area_2d_area_exited"]
+[connection signal="mouse_entered" from="FullArea" to="." method="_on_full_area_mouse_entered"]
+[connection signal="mouse_exited" from="FullArea" to="." method="_on_full_area_mouse_exited"]
+[connection signal="mouse_entered" from="SmallArea" to="." method="_on_small_area_mouse_entered"]
+[connection signal="mouse_exited" from="SmallArea" to="." method="_on_small_area_mouse_exited"]
