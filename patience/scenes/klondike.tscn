@@ -1,0 +1,86 @@
+[gd_scene load_steps=9 format=3 uid="uid://dlkatdxwl8l3o"]
+
+[ext_resource type="Script" path="res://scripts/klondike.gd" id="1_25p4o"]
+[ext_resource type="PackedScene" uid="uid://ds7iby3eabein" path="res://scenes/card.tscn" id="2_iahgv"]
+[ext_resource type="PackedScene" uid="uid://cfch5gu74tbno" path="res://scenes/foundation.tscn" id="3_jlp3u"]
+[ext_resource type="PackedScene" uid="uid://dlm7uunerjl25" path="res://scenes/depot.tscn" id="4_puhuf"]
+[ext_resource type="Script" path="res://scripts/waste.gd" id="5_vi6ru"]
+[ext_resource type="Script" path="res://scripts/stock.gd" id="6_nj7t5"]
+[ext_resource type="Texture2D" uid="uid://c16rbwicu14xj" path="res://sprites/card_outline.png" id="7_cvy5t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d0aan"]
+
+[node name="Klondike" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_25p4o")
+card_scene = ExtResource("2_iahgv")
+
+[node name="Foundations" type="Node2D" parent="."]
+position = Vector2(756, 90)
+
+[node name="Foundation1" parent="Foundations" instance=ExtResource("3_jlp3u")]
+position = Vector2(-180, 0)
+
+[node name="Foundation2" parent="Foundations" instance=ExtResource("3_jlp3u")]
+position = Vector2(-60, 0)
+
+[node name="Foundation3" parent="Foundations" instance=ExtResource("3_jlp3u")]
+position = Vector2(60, 0)
+
+[node name="Foundation4" parent="Foundations" instance=ExtResource("3_jlp3u")]
+position = Vector2(180, 0)
+
+[node name="Depots" type="Node2D" parent="."]
+position = Vector2(576, 250)
+
+[node name="Depot" parent="Depots" instance=ExtResource("4_puhuf")]
+position = Vector2(-360, 0)
+
+[node name="Depot2" parent="Depots" instance=ExtResource("4_puhuf")]
+position = Vector2(-240, 0)
+
+[node name="Depot3" parent="Depots" instance=ExtResource("4_puhuf")]
+position = Vector2(-120, 0)
+
+[node name="Depot4" parent="Depots" instance=ExtResource("4_puhuf")]
+
+[node name="Depot5" parent="Depots" instance=ExtResource("4_puhuf")]
+position = Vector2(120, 0)
+
+[node name="Depot6" parent="Depots" instance=ExtResource("4_puhuf")]
+position = Vector2(240, 0)
+
+[node name="Depot7" parent="Depots" instance=ExtResource("4_puhuf")]
+position = Vector2(360, 0)
+
+[node name="Waste" type="Node2D" parent="."]
+position = Vector2(336, 90)
+script = ExtResource("5_vi6ru")
+
+[node name="ReserveCards" type="Node2D" parent="Waste"]
+
+[node name="SecondCard" type="Node2D" parent="Waste"]
+position = Vector2(30, 0)
+
+[node name="FirstCard" type="Node2D" parent="Waste"]
+position = Vector2(60, 0)
+
+[node name="Stock" type="Node2D" parent="."]
+position = Vector2(216, 90)
+script = ExtResource("6_nj7t5")
+
+[node name="OutlineSprite" type="Sprite2D" parent="Stock"]
+texture = ExtResource("7_cvy5t")
+
+[node name="Area2D" type="Area2D" parent="Stock"]
+scale = Vector2(2.5, 3.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stock/Area2D"]
+shape = SubResource("RectangleShape2D_d0aan")
+
+[node name="Cards" type="Node2D" parent="Stock"]
+
+[node name="Cards" type="Node2D" parent="."]
+
+[connection signal="mouse_entered" from="Stock/Area2D" to="Stock" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Stock/Area2D" to="Stock" method="_on_area_2d_mouse_exited"]

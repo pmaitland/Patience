@@ -1,3 +1,3 @@
 extends Node
 
-var mouse_has_card: bool = false
+var card_being_dragged: Node2D = null

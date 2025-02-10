@@ -11,11 +11,19 @@ config_version=5
 [application]
 
 config/name="Patience"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/klondike.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Enums="*res://scripts/Enums.gd"
-Globals="*res://scripts/Globals.gd"
+Enums="*res://scripts/enums.gd"
+Globals="*res://scripts/globals.gd"
+
+[display]
+
+window/stretch/mode="viewport"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0, 0.471963, 0.182906, 1)

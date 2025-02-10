@@ -1,15 +1,13 @@
 extends Node2D
 
 enum Suit {
-	NONE,
 	SPADES,
 	HEARTS,
-	DIAMONDS,
-	CLUBS
+	CLUBS,
+	DIAMONDS
 }
 
 enum Value {
-	NONE,
 	ACE,
 	TWO,
 	THREE,
