@@ -149,16 +149,18 @@ func check_moved_from_waste() -> void:
 		cards.add_child(self)
 
 func _on_full_area_mouse_entered() -> void:
-	full_area_has_mouse = true
+	if !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		full_area_has_mouse = true
 
 func _on_full_area_mouse_exited() -> void:
-	full_area_has_mouse = false
+		full_area_has_mouse = false
 	
 func _on_small_area_mouse_entered() -> void:
-	small_area_has_mouse = true
+	if !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		small_area_has_mouse = true
 
 func _on_small_area_mouse_exited() -> void:
-	small_area_has_mouse = false
+		small_area_has_mouse = false
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if !being_dragged: return
