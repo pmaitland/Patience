@@ -51,7 +51,7 @@ func _ready() -> void:
 			suit_label.text = "♣"
 
 func _process(_delta: float) -> void:
-	var current_mouse_position = get_global_mouse_position()
+	var current_mouse_position: Vector2 = get_global_mouse_position()
 	
 	if parent_card != null and !being_dragged:
 		z_index = parent_card.z_index + 1
@@ -69,8 +69,8 @@ func _process(_delta: float) -> void:
 		else:
 			toggle_being_dragged()
 			if !colliding_cards.is_empty():
-				var moved = false
-				for card in colliding_cards:
+				var moved: bool = false
+				for card: Node2D in colliding_cards:
 					if can_pile_in_depot(card) or can_pile_in_foundation(card):
 						free_parent()
 						parent_card = card
@@ -143,7 +143,7 @@ func free_parent():
 		
 func check_moved_from_waste() -> void:
 	if "FirstCard" in get_parent().name:
-		var cards = get_tree().root.get_node("Klondike/Cards")
+		var cards: Node2D = get_tree().root.get_node("Klondike/Cards")
 		get_parent().get_parent().remove_card(self)
 		cards.add_child(self)
 
@@ -155,7 +155,7 @@ func _on_area_2d_mouse_exited() -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if !being_dragged: return
-	var parent = area.get_parent()
+	var parent: Node2D = area.get_parent()
 	if "Card" in parent.name and !parent.being_dragged and parent.face_up and (parent.in_depot or parent.in_foundation):
 		colliding_cards.append(parent)
 	elif "Foundation" in parent.name and value == Enums.Value.ACE:
@@ -164,7 +164,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		colliding_depots.append(parent)
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
-	var parent = area.get_parent()
+	var parent: Node2D = area.get_parent()
 	if parent in colliding_cards:
 		colliding_cards.remove_at(colliding_cards.find(parent))
 	elif parent in colliding_foundations:

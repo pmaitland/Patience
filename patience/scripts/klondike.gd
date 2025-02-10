@@ -9,9 +9,9 @@ extends Node2D
 func _ready() -> void:
 	var new_cards: Array[Node2D] = []
 	
-	for suit in range(4):
-		for value in range(13):
-			var card = card_scene.instantiate()
+	for suit: int in range(4):
+		for value: int  in range(13):
+			var card: Node2D = card_scene.instantiate()
 			card.name = "Card%s-%s" % [suit, value]
 			card.suit = suit as Enums.Suit
 			card.value = value as Enums.Value
@@ -21,11 +21,11 @@ func _ready() -> void:
 			card.flip()
 	new_cards.shuffle()
 	
-	for depot_number in range(depots.get_child_count()):
-		var depot = depots.get_children()[depot_number]
+	for depot_number: int in range(depots.get_child_count()):
+		var depot: Node2D = depots.get_children()[depot_number]
 		var previous_card: Node2D = null
-		for card_count in range(depot_number+1):
-			var card = new_cards[0]
+		for card_count: int in range(depot_number+1):
+			var card: Node2D = new_cards[0]
 			card.global_position = Vector2(depot.global_position.x, depot.global_position.y + card_count * 10)
 			card.in_depot = true
 			new_cards.remove_at(0)
@@ -37,6 +37,6 @@ func _ready() -> void:
 				card.dragging_blocked = false
 				card.flip()
 	
-	for card in new_cards:
+	for card: Node2D in new_cards:
 		cards.remove_child(card)
 		stock.cards.add_child(card)
