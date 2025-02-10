@@ -15,7 +15,7 @@ var small_area_has_mouse: bool = false
 var dragging_blocked: bool = false
 var being_dragged: bool = false
 var last_mouse_position: Vector2 = Vector2.ZERO
-var pre_drag_position: Vector2 = position
+var pre_drag_position: Vector2 = global_position
 
 var in_depot: bool = false
 var in_foundation: bool = false
@@ -26,6 +26,8 @@ var colliding_depots: Array[Node2D] = []
 
 var parent_card: Node2D = null
 var child_card: Node2D = null
+
+var t: float = 0.0
 
 func _ready() -> void:
 	match value:
