@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c16rbwicu14xj" path="res://sprites/card_outline.png" id="2_yu53f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0aan"]
-size = Vector2(50, 70)
+size = Vector2(100, 140)
 
 [node name="Depot" type="Node2D"]
 

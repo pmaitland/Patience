@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c16rbwicu14xj" path="res://sprites/card_outline.png" id="7_cvy5t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0aan"]
+size = Vector2(40, 40)
 
 [node name="Klondike" type="Node2D"]
 texture_filter = 1

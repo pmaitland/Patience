@@ -63,7 +63,7 @@ func _process(_delta: float) -> void:
 		z_index = parent_card.z_index + 1
 		global_position = Vector2(parent_card.global_position.x, parent_card.global_position.y)
 		if !parent_card.in_foundation:
-			global_position.y += 20
+			global_position.y += 40
 			
 	if trigger_dragging():
 		toggle_being_dragged()
