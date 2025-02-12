@@ -82,6 +82,7 @@ shape = SubResource("RectangleShape2D_d0aan")
 [node name="Cards" type="Node2D" parent="Stock"]
 
 [node name="Cards" type="Node2D" parent="."]
+position = Vector2(216, 90)
 
 [node name="SeedLabel" type="Label" parent="."]
 offset_left = 9.0

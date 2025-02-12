@@ -30,6 +30,7 @@ var parent_card: Node2D = null
 var child_card: Node2D = null
 
 var t: float = 0.0
+var delta_mult: float = 2.0
 
 func _process(_delta: float) -> void:
 	var current_mouse_position: Vector2 = get_global_mouse_position()
@@ -41,6 +42,7 @@ func _process(_delta: float) -> void:
 			global_position.y += 40
 			
 	if trigger_dragging():
+		delta_mult = 10.0
 		toggle_being_dragged()
 		
 	if being_dragged:
@@ -88,7 +90,7 @@ func _process(_delta: float) -> void:
 	
 func _physics_process(delta: float) -> void:
 	if returning_to_pre_drag_position:
-		t += delta * 10
+		t += delta * delta_mult
 		if z_index < 1000:
 			z_index += 1000
 		global_position = post_drag_position.lerp(pre_drag_position, t)

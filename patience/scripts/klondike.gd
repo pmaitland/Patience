@@ -40,7 +40,6 @@ func _ready() -> void:
 		var previous_card: Node2D = null
 		for card_count: int in range(depot_number+1):
 			var card: Node2D = new_cards[0]
-			card.global_position = Vector2(depot.global_position.x, depot.global_position.y + card_count * 40)
 			card.in_depot = true
 			new_cards.remove_at(0)
 			if previous_card != null:
@@ -50,6 +49,10 @@ func _ready() -> void:
 			if card_count == depot_number:
 				card.dragging_blocked = false
 				card.flip()
+			card.z_index += card_count
+			card.post_drag_position = stock.global_position
+			card.pre_drag_position = Vector2(depot.global_position.x, depot.global_position.y + card_count * 40)
+			card.returning_to_pre_drag_position = true
 	
 	for card: Node2D in new_cards:
 		cards.remove_child(card)
