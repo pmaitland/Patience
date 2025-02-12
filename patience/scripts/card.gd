@@ -1,8 +1,7 @@
 extends Node2D
 
-@onready var value_label: Label = $ValueLabel
-@onready var suit_label: Label = $SuitLabel
-@onready var front_sprite: Sprite2D = $FrontSprite
+@onready var base_sprite: Sprite2D = $BaseSprite
+@onready var face_sprite: Sprite2D = $FaceSprite
 @onready var back_sprite: Sprite2D = $BackSprite
 
 var value: Enums.Value
@@ -31,30 +30,6 @@ var parent_card: Node2D = null
 var child_card: Node2D = null
 
 var t: float = 0.0
-
-func _ready() -> void:
-	match value:
-		Enums.Value.ACE:
-			value_label.text = "A"
-		Enums.Value.KING:
-			value_label.text = "🤴"
-		Enums.Value.QUEEN:
-			value_label.text = "👸"
-		Enums.Value.JACK:
-			value_label.text = "🎃"
-		Enums.Value.TEN:
-			value_label.text = "X"
-		_:
-			value_label.text = str(value+1)
-	match suit:
-		Enums.Suit.SPADES:
-			suit_label.text = "♠"
-		Enums.Suit.HEARTS:
-			suit_label.text = "♥"
-		Enums.Suit.DIAMONDS:
-			suit_label.text = "♦"
-		Enums.Suit.CLUBS:
-			suit_label.text = "♣"
 
 func _process(_delta: float) -> void:
 	var current_mouse_position: Vector2 = get_global_mouse_position()
@@ -123,9 +98,8 @@ func _physics_process(delta: float) -> void:
 		
 func flip() -> void:
 	face_up = !face_up
-	front_sprite.visible = face_up
-	value_label.visible = face_up
-	suit_label.visible = face_up
+	base_sprite.visible = face_up
+	face_sprite.visible = face_up
 	back_sprite.visible = !face_up
 	
 func trigger_dragging() -> bool:

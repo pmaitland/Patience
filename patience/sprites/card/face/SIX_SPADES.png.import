@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d25lqx1qc77m0"
-path="res://.godot/imported/card_back.png-694fc26d3d8c0a3be19cf9042ecab689.ctex"
+uid="uid://bd3hq0u5buvqi"
+path="res://.godot/imported/SIX_SPADES.png-1c0b128e94aff644ba27a2d78c5fa2a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/card_back.png"
-dest_files=["res://.godot/imported/card_back.png-694fc26d3d8c0a3be19cf9042ecab689.ctex"]
+source_file="res://sprites/card/face/SIX_SPADES.png"
+dest_files=["res://.godot/imported/SIX_SPADES.png-1c0b128e94aff644ba27a2d78c5fa2a6.ctex"]
 
 [params]
 

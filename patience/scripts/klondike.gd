@@ -19,6 +19,10 @@ func _ready() -> void:
 			cards.add_child(card)
 			new_cards.append(card)
 			card.flip()
+			card.face_sprite.texture = load("res://sprites/card/face/{value}_{suit}.png".format({
+				"value": Enums.Value.keys()[card.value],
+				"suit": Enums.Suit.keys()[card.suit]
+			}))
 	new_cards.shuffle()
 	
 	for depot_number: int in range(depots.get_child_count()):

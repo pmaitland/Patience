@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://ds7iby3eabein"]
 
 [ext_resource type="Script" path="res://scripts/card.gd" id="1_u7yu8"]
-[ext_resource type="Texture2D" uid="uid://bplon4im6i5q6" path="res://sprites/card_front.png" id="2_ogtmq"]
-[ext_resource type="Texture2D" uid="uid://d25lqx1qc77m0" path="res://sprites/card_back.png" id="3_adtt8"]
+[ext_resource type="Texture2D" uid="uid://bplon4im6i5q6" path="res://sprites/card/base.png" id="2_ogtmq"]
+[ext_resource type="Texture2D" uid="uid://d25lqx1qc77m0" path="res://sprites/card/back.png" id="3_adtt8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lnio7"]
 size = Vector2(40, 40)
@@ -26,36 +26,16 @@ shape = SubResource("RectangleShape2D_lnio7")
 position = Vector2(0, -50)
 shape = SubResource("RectangleShape2D_3nmts")
 
-[node name="FrontSprite" type="Sprite2D" parent="."]
-texture_filter = 1
+[node name="BaseSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_ogtmq")
+
+[node name="FaceSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_ogtmq")
 
 [node name="BackSprite" type="Sprite2D" parent="."]
 visible = false
 texture_filter = 1
 texture = ExtResource("3_adtt8")
-
-[node name="ValueLabel" type="Label" parent="."]
-offset_left = -37.0
-offset_top = -35.0
-offset_right = 3.0
-offset_bottom = -12.0
-scale = Vector2(1.24558, 1.52507)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SuitLabel" type="Label" parent="."]
-offset_left = -12.0
-offset_top = -34.0
-offset_right = 28.0
-offset_bottom = -11.0
-scale = Vector2(1.25137, 1.52312)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "1"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [connection signal="area_entered" from="FullArea" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="FullArea" to="." method="_on_area_2d_area_exited"]
