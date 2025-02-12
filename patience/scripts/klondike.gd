@@ -6,6 +6,9 @@ extends Node2D
 @onready var stock: Node2D = $Stock
 @onready var depots: Node2D = $Depots
 
+@onready var seed_label: Label = $SeedLabel
+@onready var reset: Button = $Reset
+
 func _ready() -> void:
 	var new_cards: Array[Node2D] = []
 	
@@ -23,6 +26,13 @@ func _ready() -> void:
 				"value": Enums.Value.keys()[card.value],
 				"suit": Enums.Suit.keys()[card.suit]
 			}))
+			
+	var new_seed: String = ""
+	for i in range(8):
+		new_seed += "%x" % [randi_range(0, 15)]
+	seed(new_seed.hash())
+	seed_label.text = new_seed
+	
 	new_cards.shuffle()
 	
 	for depot_number: int in range(depots.get_child_count()):
@@ -44,3 +54,6 @@ func _ready() -> void:
 	for card: Node2D in new_cards:
 		cards.remove_child(card)
 		stock.cards.add_child(card)
+
+func _on_reset_button_down() -> void:
+	get_tree().reload_current_scene()
