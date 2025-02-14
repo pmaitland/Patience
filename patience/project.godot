@@ -17,8 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Enums="*res://scripts/enums.gd"
 Globals="*res://scripts/globals.gd"
+Enums="*res://scripts/enums.gd"
+Colors="*res://scripts/colors.gd"
 
 [display]
 
@@ -26,4 +27,4 @@ window/stretch/mode="viewport"
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0, 0.471963, 0.182906, 1)
+environment/defaults/default_clear_color=Color(0.196078, 0.486275, 0.239216, 1)

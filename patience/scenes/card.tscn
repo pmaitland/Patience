@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ds7iby3eabein"]
+[gd_scene load_steps=12 format=3 uid="uid://ds7iby3eabein"]
 
 [ext_resource type="Script" path="res://scripts/card.gd" id="1_u7yu8"]
 [ext_resource type="Texture2D" uid="uid://bplon4im6i5q6" path="res://sprites/card/base.png" id="2_ogtmq"]
@@ -12,6 +12,39 @@ size = Vector2(40, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3nmts"]
 size = Vector2(100, 40)
+
+[sub_resource type="Shader" id="Shader_by825"]
+code = "shader_type canvas_item;
+
+uniform int width: hint_range(0, 5, 1);
+uniform vec4 outline_color: source_color;
+
+void fragment() {
+	float pixel_size_x = 1.0 / float(textureSize(TEXTURE, 0).x);
+	float pixel_size_y = 1.0 / float(textureSize(TEXTURE, 0).y);
+	vec2 pixel_size = vec2(pixel_size_x, pixel_size_y);
+	if (texture(TEXTURE, UV).a == 0.) { 
+		for (int x = -width; x <= width; x++) {
+			for(int y = -width; y <= width; y++) {
+				vec2 pixel_offset = vec2(float(x), float(y));
+				if(texture(TEXTURE, UV + (pixel_offset * pixel_size)).a > 0.) {
+					COLOR = outline_color;
+				}
+			}
+		}
+	} else {
+		COLOR = texture(TEXTURE, UV);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_84vjw"]
+resource_local_to_scene = true
+shader = SubResource("Shader_by825")
+shader_parameter/width = 0
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5i3tg"]
+load_path = "res://.godot/imported/base.png-3dfc6659ce61ccc7b18f48c0c97afa0a.ctex"
 
 [node name="Card" type="Node2D"]
 script = ExtResource("1_u7yu8")
@@ -33,7 +66,8 @@ shape = SubResource("RectangleShape2D_3nmts")
 
 [node name="BaseSprite" type="Sprite2D" parent="Front"]
 texture_filter = 1
-texture = ExtResource("2_ogtmq")
+material = SubResource("ShaderMaterial_84vjw")
+texture = SubResource("CompressedTexture2D_5i3tg")
 
 [node name="UpperCornerValueSprite" type="Sprite2D" parent="Front"]
 texture_filter = 1
@@ -65,7 +99,11 @@ texture = ExtResource("5_po1bn")
 [node name="Back" type="Node2D" parent="."]
 visible = false
 
-[node name="BackSprite" type="Sprite2D" parent="Back"]
+[node name="BaseSprite" type="Sprite2D" parent="Back"]
+texture_filter = 1
+texture = ExtResource("2_ogtmq")
+
+[node name="DesignSprite" type="Sprite2D" parent="Back"]
 texture_filter = 1
 texture = ExtResource("3_adtt8")
 

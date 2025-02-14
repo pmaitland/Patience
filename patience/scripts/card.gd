@@ -7,6 +7,7 @@ var value: Enums.Value
 var suit: Enums.Suit
 
 var face_up: bool = true
+var has_outline: bool = false
 
 var full_area_has_mouse: bool = false
 var small_area_has_mouse: bool = false
@@ -40,6 +41,16 @@ func _process(_delta: float) -> void:
 		if !parent_card.in_foundation:
 			global_position.y += 40
 			
+	has_outline = face_up and !dragging_blocked and \
+		(being_dragged \
+		or (parent_card != null and parent_card.has_outline) \
+		or small_area_has_mouse \
+		or (full_area_has_mouse and child_card == null))
+	if has_outline:
+		front.get_child(0).material.set_shader_parameter('width', 3)
+	else:
+		front.get_child(0).material.set_shader_parameter('width', 0)
+	
 	if trigger_dragging():
 		delta_mult = 10.0
 		toggle_being_dragged()
@@ -102,9 +113,9 @@ func setup(v: Enums.Value, s: Enums.Suit) -> void:
 	suit = s
 	name = "Card%s-%s" % [value, suit]
 	
-	var color: Color = Color(0, 0, 0)
+	var color: Color = Colors.CARD_BLACK
 	if is_red():
-		color = Color(255, 0, 0)
+		color = Colors.CARD_RED
 	
 	var cornerValueSprite: Texture2D = load("res://sprites/card/corner/value/{value}.png".format({
 		"value": Enums.Value.keys()[value]
@@ -127,6 +138,10 @@ func setup(v: Enums.Value, s: Enums.Suit) -> void:
 	
 	for i in range(1, front.get_child_count()):
 		front.get_child(i).set_modulate(color)
+		
+	back.get_child(1).set_modulate(Colors.CARD_BACK)
+	
+	front.get_child(0).material.set_shader_parameter('outline_color', Colors.CARD_OUTLINE)
 	
 	dragging_blocked = true
 	
