@@ -1,8 +1,7 @@
 extends Node2D
 
-@onready var base_sprite: Sprite2D = $BaseSprite
-@onready var face_sprite: Sprite2D = $FaceSprite
-@onready var back_sprite: Sprite2D = $BackSprite
+@onready var front: Node2D = $Front
+@onready var back: Node2D = $Back
 
 var value: Enums.Value
 var suit: Enums.Suit
@@ -98,11 +97,49 @@ func _physics_process(delta: float) -> void:
 			returning_to_pre_drag_position = false
 			z_index -= 1000
 		
+func setup(v: Enums.Value, s: Enums.Suit) -> void:
+	value = v
+	suit = s
+	name = "Card%s-%s" % [value, suit]
+	
+	var color: Color = Color(0, 0, 0)
+	if is_red():
+		color = Color(255, 0, 0)
+	
+	var cornerValueSprite: Texture2D = load("res://sprites/card/corner/value/{value}.png".format({
+		"value": Enums.Value.keys()[value]
+	}))
+	front.get_child(1).texture = cornerValueSprite
+	front.get_child(2).texture = cornerValueSprite
+	
+	var cornerSuitSprite: Texture2D = load("res://sprites/card/corner/suit/{suit}.png".format({
+		"suit": Enums.Suit.keys()[suit]
+	}))
+	front.get_child(3).texture = cornerSuitSprite
+	front.get_child(4).texture = cornerSuitSprite
+	
+	if value == Enums.Value.ACE:
+		var aceSprite: Texture2D = load("res://sprites/card/centre/ace/{suit}.png".format({
+			"suit": Enums.Suit.keys()[suit]
+		}))
+		front.get_child(5).texture = aceSprite
+		front.get_child(5).visible = true
+	
+	for i in range(1, front.get_child_count()):
+		front.get_child(i).set_modulate(color)
+	
+	dragging_blocked = true
+	
+func is_black() -> bool:
+	return suit == Enums.Suit.SPADES or suit == Enums.Suit.CLUBS
+
+func is_red() -> bool:
+	return suit == Enums.Suit.HEARTS or suit == Enums.Suit.DIAMONDS
+
 func flip() -> void:
 	face_up = !face_up
-	base_sprite.visible = face_up
-	face_sprite.visible = face_up
-	back_sprite.visible = !face_up
+	front.visible = face_up
+	back.visible = !face_up
 	
 func trigger_dragging() -> bool:
 	return (small_area_has_mouse or (full_area_has_mouse and child_card == null)) \

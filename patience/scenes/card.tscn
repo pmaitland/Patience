@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ds7iby3eabein"]
+[gd_scene load_steps=9 format=3 uid="uid://ds7iby3eabein"]
 
 [ext_resource type="Script" path="res://scripts/card.gd" id="1_u7yu8"]
 [ext_resource type="Texture2D" uid="uid://bplon4im6i5q6" path="res://sprites/card/base.png" id="2_ogtmq"]
 [ext_resource type="Texture2D" uid="uid://d25lqx1qc77m0" path="res://sprites/card/back.png" id="3_adtt8"]
+[ext_resource type="Texture2D" uid="uid://cerho2dl4oid" path="res://sprites/card/corner/value/ACE.png" id="3_gi8li"]
+[ext_resource type="Texture2D" uid="uid://bdk0j1xtbgmsb" path="res://sprites/card/corner/suit/SPADES.png" id="4_ynlmx"]
+[ext_resource type="Texture2D" uid="uid://b2lq2fiten0dg" path="res://sprites/card/centre/ace/SPADES.png" id="5_po1bn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lnio7"]
 size = Vector2(40, 40)
@@ -26,14 +29,43 @@ shape = SubResource("RectangleShape2D_lnio7")
 position = Vector2(0, -50)
 shape = SubResource("RectangleShape2D_3nmts")
 
-[node name="BaseSprite" type="Sprite2D" parent="."]
+[node name="Front" type="Node2D" parent="."]
+
+[node name="BaseSprite" type="Sprite2D" parent="Front"]
+texture_filter = 1
 texture = ExtResource("2_ogtmq")
 
-[node name="FaceSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_ogtmq")
+[node name="UpperCornerValueSprite" type="Sprite2D" parent="Front"]
+texture_filter = 1
+position = Vector2(-40.5, -59)
+texture = ExtResource("3_gi8li")
 
-[node name="BackSprite" type="Sprite2D" parent="."]
+[node name="LowerCornerValueSprite" type="Sprite2D" parent="Front"]
+texture_filter = 1
+position = Vector2(40.5, 59)
+rotation = 3.14159
+texture = ExtResource("3_gi8li")
+
+[node name="UpperCornerSuitSprite" type="Sprite2D" parent="Front"]
+texture_filter = 1
+position = Vector2(-40.5, -44)
+texture = ExtResource("4_ynlmx")
+
+[node name="LowerCornerSuitSprite" type="Sprite2D" parent="Front"]
+texture_filter = 1
+position = Vector2(40.5, 44)
+rotation = -3.14159
+texture = ExtResource("4_ynlmx")
+
+[node name="AceSprite" type="Sprite2D" parent="Front"]
 visible = false
+texture_filter = 1
+texture = ExtResource("5_po1bn")
+
+[node name="Back" type="Node2D" parent="."]
+visible = false
+
+[node name="BackSprite" type="Sprite2D" parent="Back"]
 texture_filter = 1
 texture = ExtResource("3_adtt8")
 

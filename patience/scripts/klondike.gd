@@ -15,17 +15,10 @@ func _ready() -> void:
 	for suit: int in range(4):
 		for value: int  in range(13):
 			var card: Node2D = card_scene.instantiate()
-			card.name = "Card%s-%s" % [suit, value]
-			card.suit = suit as Enums.Suit
-			card.value = value as Enums.Value
-			card.dragging_blocked = true
 			cards.add_child(card)
-			new_cards.append(card)
+			card.setup(value as Enums.Value, suit as Enums.Suit)
 			card.flip()
-			card.face_sprite.texture = load("res://sprites/card/face/{value}_{suit}.png".format({
-				"value": Enums.Value.keys()[card.value],
-				"suit": Enums.Suit.keys()[card.suit]
-			}))
+			new_cards.append(card)
 			
 	var new_seed: String = ""
 	for i in range(8):
