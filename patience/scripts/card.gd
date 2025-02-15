@@ -7,7 +7,6 @@ extends Node2D
 @onready var lower_corner_value_sprite: Sprite2D = $Front/LowerCornerValueSprite
 @onready var upper_corner_suit_sprite: Sprite2D = $Front/UpperCornerSuitSprite
 @onready var lower_corner_suit_sprite: Sprite2D = $Front/LowerCornerSuitSprite
-@onready var ace_sprite: Sprite2D = $Front/AceSprite
 
 @onready var back: Node2D = $Back
 @onready var design_sprite: Sprite2D = $Back/DesignSprite
@@ -143,13 +142,13 @@ func setup(v: Enums.Value, s: Enums.Suit) -> void:
 	lower_corner_suit_sprite.texture = cornerSuitSprite
 	lower_corner_suit_sprite.set_modulate(color)
 	
-	if value == Enums.Value.ACE:
-		var aceSprite: Texture2D = load("res://sprites/card/centre/ace/{suit}.png".format({
-			"suit": Enums.Suit.keys()[suit]
-		}))
-		ace_sprite.texture = aceSprite
-		ace_sprite.visible = true
-		ace_sprite.set_modulate(color)
+	for child in front.get_children():
+		if Enums.Value.keys()[value] in child.name:
+			child.texture = load("res://sprites/card/centre/{suit}.png".format({
+				"suit": Enums.Suit.keys()[suit]
+			}))
+			child.visible = true
+			child.set_modulate(color)
 		
 	design_sprite.set_modulate(Colors.CARD_BACK)
 	

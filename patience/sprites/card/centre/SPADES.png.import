@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhbo43evawlnn"
-path="res://.godot/imported/DIAMONDS.png-110f0f52c774cb634c7d3dabbe481d8b.ctex"
+uid="uid://b2lq2fiten0dg"
+path="res://.godot/imported/SPADES.png-89a8a2afbf388f491db61e261b41d944.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/card/centre/ace/DIAMONDS.png"
-dest_files=["res://.godot/imported/DIAMONDS.png-110f0f52c774cb634c7d3dabbe481d8b.ctex"]
+source_file="res://sprites/card/centre/SPADES.png"
+dest_files=["res://.godot/imported/SPADES.png-89a8a2afbf388f491db61e261b41d944.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

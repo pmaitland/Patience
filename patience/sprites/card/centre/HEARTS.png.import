@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2lq2fiten0dg"
-path="res://.godot/imported/SPADES.png-a6c206d3cdea11c5e622bf8e09780d02.ctex"
+uid="uid://e0pumhm267hl"
+path="res://.godot/imported/HEARTS.png-e95b809078c49a877dcefb4897afc313.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/card/centre/ace/SPADES.png"
-dest_files=["res://.godot/imported/SPADES.png-a6c206d3cdea11c5e622bf8e09780d02.ctex"]
+source_file="res://sprites/card/centre/HEARTS.png"
+dest_files=["res://.godot/imported/HEARTS.png-e95b809078c49a877dcefb4897afc313.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

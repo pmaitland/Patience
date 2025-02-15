@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://e0pumhm267hl"
-path="res://.godot/imported/HEARTS.png-2dbdecd7a1dbe9511daef3cea3cc33a8.ctex"
+uid="uid://c0e4typnklbfh"
+path="res://.godot/imported/CLUBS.png-919afff16f13a4616c37df65fdd9bbfc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/card/centre/ace/HEARTS.png"
-dest_files=["res://.godot/imported/HEARTS.png-2dbdecd7a1dbe9511daef3cea3cc33a8.ctex"]
+source_file="res://sprites/card/centre/CLUBS.png"
+dest_files=["res://.godot/imported/CLUBS.png-919afff16f13a4616c37df65fdd9bbfc.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

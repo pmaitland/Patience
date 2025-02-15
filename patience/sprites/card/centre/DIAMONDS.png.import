@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0e4typnklbfh"
-path="res://.godot/imported/CLUBS.png-9e8e49ea1b4922f3c28a55277e0605a7.ctex"
+uid="uid://bhbo43evawlnn"
+path="res://.godot/imported/DIAMONDS.png-24e8fc77fcf758b8fbbeef12743048b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/card/centre/ace/CLUBS.png"
-dest_files=["res://.godot/imported/CLUBS.png-9e8e49ea1b4922f3c28a55277e0605a7.ctex"]
+source_file="res://sprites/card/centre/DIAMONDS.png"
+dest_files=["res://.godot/imported/DIAMONDS.png-24e8fc77fcf758b8fbbeef12743048b6.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
