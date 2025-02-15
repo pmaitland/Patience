@@ -1,7 +1,16 @@
 extends Node2D
 
 @onready var front: Node2D = $Front
+@onready var base_sprite_with_shadow: Sprite2D = $Front/BaseSpriteWithShadow
+@onready var base_sprite_with_outline: Sprite2D = $Front/BaseSpriteWithOutline
+@onready var upper_corner_value_sprite: Sprite2D = $Front/UpperCornerValueSprite
+@onready var lower_corner_value_sprite: Sprite2D = $Front/LowerCornerValueSprite
+@onready var upper_corner_suit_sprite: Sprite2D = $Front/UpperCornerSuitSprite
+@onready var lower_corner_suit_sprite: Sprite2D = $Front/LowerCornerSuitSprite
+@onready var ace_sprite: Sprite2D = $Front/AceSprite
+
 @onready var back: Node2D = $Back
+@onready var design_sprite: Sprite2D = $Back/DesignSprite
 
 var value: Enums.Value
 var suit: Enums.Suit
@@ -48,9 +57,9 @@ func _process(_delta: float) -> void:
 			or small_area_has_mouse \
 			or (full_area_has_mouse and child_card == null)))
 	if has_outline:
-		front.get_child(0).material.set_shader_parameter('width', 3)
+		base_sprite_with_outline.material.set_shader_parameter('width', 3)
 	else:
-		front.get_child(0).material.set_shader_parameter('width', 0)
+		base_sprite_with_outline.material.set_shader_parameter('width', 0)
 	
 	if trigger_dragging():
 		delta_mult = 10.0
@@ -121,28 +130,30 @@ func setup(v: Enums.Value, s: Enums.Suit) -> void:
 	var cornerValueSprite: Texture2D = load("res://sprites/card/corner/value/{value}.png".format({
 		"value": Enums.Value.keys()[value]
 	}))
-	front.get_child(1).texture = cornerValueSprite
-	front.get_child(2).texture = cornerValueSprite
+	upper_corner_value_sprite.texture = cornerValueSprite
+	upper_corner_value_sprite.set_modulate(color)
+	lower_corner_value_sprite.texture = cornerValueSprite
+	lower_corner_value_sprite.set_modulate(color)
 	
 	var cornerSuitSprite: Texture2D = load("res://sprites/card/corner/suit/{suit}.png".format({
 		"suit": Enums.Suit.keys()[suit]
 	}))
-	front.get_child(3).texture = cornerSuitSprite
-	front.get_child(4).texture = cornerSuitSprite
+	upper_corner_suit_sprite.texture = cornerSuitSprite
+	upper_corner_suit_sprite.set_modulate(color)
+	lower_corner_suit_sprite.texture = cornerSuitSprite
+	lower_corner_suit_sprite.set_modulate(color)
 	
 	if value == Enums.Value.ACE:
 		var aceSprite: Texture2D = load("res://sprites/card/centre/ace/{suit}.png".format({
 			"suit": Enums.Suit.keys()[suit]
 		}))
-		front.get_child(5).texture = aceSprite
-		front.get_child(5).visible = true
-	
-	for i in range(1, front.get_child_count()):
-		front.get_child(i).set_modulate(color)
+		ace_sprite.texture = aceSprite
+		ace_sprite.visible = true
+		ace_sprite.set_modulate(color)
 		
-	back.get_child(1).set_modulate(Colors.CARD_BACK)
+	design_sprite.set_modulate(Colors.CARD_BACK)
 	
-	front.get_child(0).material.set_shader_parameter('color', Colors.CARD_OUTLINE)
+	base_sprite_with_outline.material.set_shader_parameter('color', Colors.CARD_OUTLINE)
 	
 	dragging_blocked = true
 	
@@ -177,9 +188,11 @@ func toggle_being_dragged() -> void:
 		z_index += 1000
 		scale = Vector2(1.2, 1.2)
 		pre_drag_position = global_position
+		base_sprite_with_shadow.material.set_shader_parameter('height', 5)
 	else:
 		z_index -= 1000
 		scale = Vector2(1, 1)
+		base_sprite_with_shadow.material.set_shader_parameter('height', 0)
 	if child_card != null:
 		child_card.toggle_being_dragged()
 		

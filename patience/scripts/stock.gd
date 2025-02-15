@@ -12,7 +12,7 @@ func _ready() -> void:
 	outline_sprite.material.set_shader_parameter('color', Colors.CARD_OUTLINE)
 	
 func _input(event: InputEvent) -> void:
-	if has_mouse:
+	if has_mouse and !Globals.dragging_card:
 		outline_sprite.material.set_shader_parameter('width', 3)
 		
 		if event is InputEventMouseButton and event.is_pressed():

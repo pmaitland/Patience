@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dlm7uunerjl25" path="res://scenes/depot.tscn" id="4_puhuf"]
 [ext_resource type="Script" path="res://scripts/waste.gd" id="5_vi6ru"]
 [ext_resource type="Script" path="res://scripts/stock.gd" id="6_nj7t5"]
-[ext_resource type="Shader" path="res://shaders/card.gdshader" id="7_78so3"]
+[ext_resource type="Shader" path="res://shaders/card_outline.gdshader" id="7_78so3"]
 [ext_resource type="Texture2D" uid="uid://jik83oawusda" path="res://sprites/card/outline.png" id="7_ib0m3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5vfgr"]
