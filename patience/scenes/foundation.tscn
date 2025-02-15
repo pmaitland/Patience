@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cfch5gu74tbno"]
 
-[ext_resource type="Texture2D" uid="uid://c16rbwicu14xj" path="res://sprites/card_outline.png" id="2_8pfaa"]
+[ext_resource type="Texture2D" uid="uid://jik83oawusda" path="res://sprites/card/outline.png" id="1_hx8la"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0aan"]
 size = Vector2(40, 40)
@@ -8,7 +8,8 @@ size = Vector2(40, 40)
 [node name="Foundation" type="Node2D"]
 
 [node name="OutlineSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_8pfaa")
+texture_filter = 1
+texture = ExtResource("1_hx8la")
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(2.5, 3.5)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dlkatdxwl8l3o"]
+[gd_scene load_steps=11 format=3 uid="uid://dlkatdxwl8l3o"]
 
 [ext_resource type="Script" path="res://scripts/klondike.gd" id="1_25p4o"]
 [ext_resource type="PackedScene" uid="uid://ds7iby3eabein" path="res://scenes/card.tscn" id="2_iahgv"]
@@ -6,7 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://dlm7uunerjl25" path="res://scenes/depot.tscn" id="4_puhuf"]
 [ext_resource type="Script" path="res://scripts/waste.gd" id="5_vi6ru"]
 [ext_resource type="Script" path="res://scripts/stock.gd" id="6_nj7t5"]
-[ext_resource type="Texture2D" uid="uid://c16rbwicu14xj" path="res://sprites/card_outline.png" id="7_cvy5t"]
+[ext_resource type="Shader" path="res://shaders/card.gdshader" id="7_78so3"]
+[ext_resource type="Texture2D" uid="uid://jik83oawusda" path="res://sprites/card/outline.png" id="7_ib0m3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vfgr"]
+shader = ExtResource("7_78so3")
+shader_parameter/width = 2
+shader_parameter/color = null
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0aan"]
 size = Vector2(40, 40)
@@ -71,7 +77,9 @@ position = Vector2(216, 90)
 script = ExtResource("6_nj7t5")
 
 [node name="OutlineSprite" type="Sprite2D" parent="Stock"]
-texture = ExtResource("7_cvy5t")
+texture_filter = 1
+material = SubResource("ShaderMaterial_5vfgr")
+texture = ExtResource("7_ib0m3")
 
 [node name="Area2D" type="Area2D" parent="Stock"]
 scale = Vector2(2.5, 3.5)

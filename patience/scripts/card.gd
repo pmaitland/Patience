@@ -41,11 +41,12 @@ func _process(_delta: float) -> void:
 		if !parent_card.in_foundation:
 			global_position.y += 40
 			
-	has_outline = face_up and !dragging_blocked and \
-		(being_dragged \
-		or (parent_card != null and parent_card.has_outline) \
-		or small_area_has_mouse \
-		or (full_area_has_mouse and child_card == null))
+	has_outline = (full_area_has_mouse and "Stock" in get_parent().get_parent().name) or \
+		(face_up and !dragging_blocked and \
+			(being_dragged \
+			or (parent_card != null and parent_card.has_outline) \
+			or small_area_has_mouse \
+			or (full_area_has_mouse and child_card == null)))
 	if has_outline:
 		front.get_child(0).material.set_shader_parameter('width', 3)
 	else:
@@ -141,7 +142,7 @@ func setup(v: Enums.Value, s: Enums.Suit) -> void:
 		
 	back.get_child(1).set_modulate(Colors.CARD_BACK)
 	
-	front.get_child(0).material.set_shader_parameter('outline_color', Colors.CARD_OUTLINE)
+	front.get_child(0).material.set_shader_parameter('color', Colors.CARD_OUTLINE)
 	
 	dragging_blocked = true
 	
