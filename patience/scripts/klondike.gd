@@ -33,7 +33,7 @@ func _ready() -> void:
 		var previous_card: Node2D = null
 		for card_count: int in range(depot_number+1):
 			var card: Node2D = new_cards[0]
-			card.in_depot = true
+			card.depot_number = int(depot.name.substr(-1))
 			new_cards.remove_at(0)
 			if previous_card != null:
 				previous_card.child_card = card
