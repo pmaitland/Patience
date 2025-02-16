@@ -61,7 +61,7 @@ func _process(_delta: float) -> void:
 		base_sprite_with_outline.material.set_shader_parameter('width', 0)
 	
 	if trigger_dragging():
-		delta_mult = 10.0
+		delta_mult = 5.0
 		toggle_being_dragged()
 		
 	if being_dragged:
@@ -89,7 +89,7 @@ func _process(_delta: float) -> void:
 			elif !colliding_depots.is_empty():
 				free_parent()
 				var new_position = colliding_depots[0].global_position
-				depot_number = int(colliding_depots[0].name.substr(-1))
+				depot_number = int(colliding_depots[0].name.substr(colliding_depots[0].name.length() - 1))
 				in_foundation = false
 				check_moved_from_waste()
 				global_position = new_position
@@ -233,7 +233,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	elif "Depot" in parent.name and value == Enums.Value.KING:
 		var is_colliding: bool = true
 		for sibling in get_parent().get_children():
-			if sibling.depot_number == int(parent.name.substr(-1)):
+			if parent.name.ends_with(str(sibling.depot_number)):
 				is_colliding = false
 				break
 		if is_colliding:
