@@ -27,8 +27,8 @@ var returning_to_pre_drag_position: bool = false
 var pre_drag_position: Vector2 = global_position
 var post_drag_position: Vector2 = global_position
 
-var depot_number: int = -1
-var in_foundation: bool = false
+var depot: Node2D = null
+var foundation: Node2D = null
 
 var colliding_cards: Array[Node2D] = []
 var colliding_foundations: Array[Node2D] = []
@@ -46,7 +46,7 @@ func _process(_delta: float) -> void:
 	if parent_card != null and !being_dragged and !returning_to_pre_drag_position:
 		z_index = parent_card.z_index + 1
 		global_position = Vector2(parent_card.global_position.x, parent_card.global_position.y)
-		if !parent_card.in_foundation:
+		if parent_card.foundation == null:
 			global_position.y += 40
 			
 	has_outline = (full_area_has_mouse and "Stock" in get_parent().get_parent().name) or \
@@ -77,8 +77,8 @@ func _process(_delta: float) -> void:
 						free_parent()
 						parent_card = card
 						card.child_card = self
-						depot_number = parent_card.depot_number
-						in_foundation = parent_card.in_foundation
+						depot = parent_card.depot
+						foundation = parent_card.foundation
 						check_moved_from_waste()
 						moved = true
 						break
@@ -89,15 +89,16 @@ func _process(_delta: float) -> void:
 			elif !colliding_depots.is_empty():
 				free_parent()
 				var new_position = colliding_depots[0].global_position
-				depot_number = int(colliding_depots[0].name.substr(colliding_depots[0].name.length() - 1))
-				in_foundation = false
+				depot = colliding_depots[0]
+				foundation = null
 				check_moved_from_waste()
 				global_position = new_position
 			elif !colliding_foundations.is_empty():
 				free_parent()
 				var new_position = colliding_foundations[0].global_position
-				depot_number = -1
-				in_foundation = true
+				colliding_foundations[0].has_card = true
+				depot = null
+				foundation = colliding_foundations[0]
 				check_moved_from_waste()
 				global_position = new_position
 			else:
@@ -175,10 +176,10 @@ func trigger_dragging() -> bool:
 		and !Globals.dragging_card
 		
 func can_pile_in_depot(card: Node2D) -> bool:
-	return card.depot_number >= 0 and card.value == value + 1 and (card.suit == (suit + 1) % 4 or card.suit == (suit + 3) % 4)
+	return card.value == value + 1 and (card.suit == (suit + 1) % 4 or card.suit == (suit + 3) % 4)
 	
 func can_pile_in_foundation(card: Node2D) -> bool:
-	return card.in_foundation and child_card == null and card.value == value - 1 and card.suit == suit
+	return child_card == null and card.value == value - 1 and card.suit == suit
 
 func toggle_being_dragged() -> void:
 	being_dragged = !being_dragged
@@ -226,14 +227,14 @@ func _on_small_area_mouse_exited() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if !being_dragged: return
 	var parent: Node2D = area.get_parent()
-	if "Card" in parent.name and !parent.being_dragged and parent.face_up and (parent.depot_number >= 0 or parent.in_foundation):
+	if "Card" in parent.name and !parent.being_dragged and parent.face_up and (parent.depot != null or parent.foundation != null):
 		colliding_cards.append(parent)
-	elif "Foundation" in parent.name and value == Enums.Value.ACE:
+	elif "Foundation" in parent.name and !parent.has_card and value == Enums.Value.ACE:
 		colliding_foundations.append(parent)
 	elif "Depot" in parent.name and value == Enums.Value.KING:
 		var is_colliding: bool = true
 		for sibling in get_parent().get_children():
-			if parent.name.ends_with(str(sibling.depot_number)):
+			if sibling != self and depot == sibling.depot:
 				is_colliding = false
 				break
 		if is_colliding:
