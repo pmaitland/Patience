@@ -1,6 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfch5gu74tbno"]
+[gd_scene load_steps=5 format=3 uid="uid://cfch5gu74tbno"]
 
 [ext_resource type="Texture2D" uid="uid://jik83oawusda" path="res://sprites/card/outline.png" id="1_hx8la"]
+[ext_resource type="Shader" path="res://shaders/card_outline.gdshader" id="1_xe31e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uf15w"]
+resource_local_to_scene = true
+shader = ExtResource("1_xe31e")
+shader_parameter/width = null
+shader_parameter/color = null
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0aan"]
 size = Vector2(40, 40)
@@ -9,6 +16,7 @@ size = Vector2(40, 40)
 
 [node name="OutlineSprite" type="Sprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_uf15w")
 texture = ExtResource("1_hx8la")
 
 [node name="Area2D" type="Area2D" parent="."]

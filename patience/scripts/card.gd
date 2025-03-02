@@ -95,12 +95,20 @@ func _process(_delta: float) -> void:
 				var new_position = colliding_foundations[0].global_position
 				depot = null
 				foundation = colliding_foundations[0]
+				foundation.find_child("OutlineSprite").material.set_shader_parameter('width', 0)
 				check_moved_from_waste()
 				global_position = new_position
 			else:
 				post_drag_position = global_position
 				t = 0.0
 				returning_to_pre_drag_position = true
+				
+		for i in range(colliding_foundations.size()):
+			if i == 0:
+				colliding_foundations[i].find_child("OutlineSprite").material.set_shader_parameter('width', 3)
+				colliding_foundations[i].find_child("OutlineSprite").material.set_shader_parameter('color', Colors.CARD_OUTLINE)
+			else:
+				colliding_foundations[i].find_child("OutlineSprite").material.set_shader_parameter('width', 0)
 		
 	last_mouse_position = current_mouse_position
 	
@@ -251,5 +259,6 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 		parent.is_target = false
 	elif parent in colliding_foundations:
 		colliding_foundations.remove_at(colliding_foundations.find(parent))
+		parent.find_child("OutlineSprite").material.set_shader_parameter('width', 0)
 	elif parent in colliding_depots:
 		colliding_depots.remove_at(colliding_depots.find(parent))

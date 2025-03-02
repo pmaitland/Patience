@@ -51,5 +51,9 @@ func _ready() -> void:
 		cards.remove_child(card)
 		stock.cards.add_child(card)
 
+func _process(_delta: float) -> void:
+	for foundation: Node2D in find_child("Foundations").get_children():
+		foundation.find_child("OutlineSprite").material.set_shader_parameter('width', 0)
+
 func _on_reset_button_down() -> void:
 	get_tree().reload_current_scene()
