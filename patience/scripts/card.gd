@@ -81,6 +81,7 @@ func _process(_delta: float) -> void:
 						parent_card = card
 						card.child_card = self
 						depot = parent_card.depot
+						propagate_depot()
 						foundation = parent_card.foundation
 						check_moved_from_waste()
 						moved = true
@@ -212,6 +213,11 @@ func check_moved_from_waste() -> void:
 		var cards: Node2D = get_tree().root.get_node("Klondike/Cards")
 		get_parent().get_parent().remove_card(self)
 		cards.add_child(self)
+		
+func propagate_depot() -> void:
+	if child_card != null:
+		child_card.depot = depot
+		child_card.propagate_depot()
 
 func _on_full_area_mouse_entered() -> void:
 	if !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
