@@ -16,6 +16,7 @@ var suit: Enums.Suit
 
 var face_up: bool = true
 var has_outline: bool = false
+var is_target: bool = false
 
 var full_area_has_mouse: bool = false
 var small_area_has_mouse: bool = false
@@ -58,7 +59,7 @@ func _process(_delta: float) -> void:
 			or (parent_card != null and parent_card.has_outline) \
 			or small_area_has_mouse \
 			or (full_area_has_mouse and child_card == null)))
-	if has_outline:
+	if has_outline or is_target:
 		base_sprite_with_outline.material.set_shader_parameter('width', 3)
 	else:
 		base_sprite_with_outline.material.set_shader_parameter('width', 0)
@@ -74,22 +75,14 @@ func _process(_delta: float) -> void:
 		else:
 			toggle_being_dragged()
 			if !colliding_cards.is_empty():
-				var moved: bool = false
-				for card: Node2D in colliding_cards:
-					if can_pile_in_depot(card) or can_pile_in_foundation(card):
-						free_parent()
-						parent_card = card
-						card.child_card = self
-						depot = parent_card.depot
-						propagate_depot()
-						foundation = parent_card.foundation
-						check_moved_from_waste()
-						moved = true
-						break
-				if !moved:
-					post_drag_position = global_position
-					t = 0.0
-					returning_to_pre_drag_position = true
+				free_parent()
+				parent_card = colliding_cards[0]
+				parent_card.is_target = false
+				colliding_cards[0].child_card = self
+				depot = parent_card.depot
+				propagate_depot()
+				foundation = parent_card.foundation
+				check_moved_from_waste()
 			elif !colliding_depots.is_empty():
 				free_parent()
 				var new_position = colliding_depots[0].global_position
@@ -100,7 +93,6 @@ func _process(_delta: float) -> void:
 			elif !colliding_foundations.is_empty():
 				free_parent()
 				var new_position = colliding_foundations[0].global_position
-				colliding_foundations[0].has_card = true
 				depot = null
 				foundation = colliding_foundations[0]
 				check_moved_from_waste()
@@ -236,9 +228,10 @@ func _on_small_area_mouse_exited() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if !being_dragged: return
 	var parent: Node2D = area.get_parent()
-	if "Card" in parent.name and !parent.being_dragged and parent.face_up and (parent.depot != null or parent.foundation != null):
+	if "Card" in parent.name and (can_pile_in_depot(parent) or can_pile_in_foundation(parent)):
 		colliding_cards.append(parent)
-	elif "Foundation" in parent.name and !parent.has_card and value == Enums.Value.ACE:
+		parent.is_target = true
+	elif "Foundation" in parent.name and value == Enums.Value.ACE:
 		colliding_foundations.append(parent)
 	elif "Depot" in parent.name and value == Enums.Value.KING:
 		var is_colliding: bool = true
@@ -255,6 +248,7 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 	var parent: Node2D = area.get_parent()
 	if parent in colliding_cards:
 		colliding_cards.remove_at(colliding_cards.find(parent))
+		parent.is_target = false
 	elif parent in colliding_foundations:
 		colliding_foundations.remove_at(colliding_foundations.find(parent))
 	elif parent in colliding_depots:
