@@ -1,4 +1,4 @@
-extends Node2D
+class_name Card extends Node2D
 
 @onready var front: Node2D = $Front
 @onready var base_sprite_with_shadow: Sprite2D = $Front/BaseSpriteWithShadow
@@ -39,6 +39,9 @@ var child_card: Node2D = null
 
 var t: float = 0.0
 var delta_mult: float = 2.0
+
+func _ready() -> void:
+	add_to_group("cards")
 
 func _process(_delta: float) -> void:
 	var current_mouse_position: Vector2 = get_global_mouse_position()
@@ -233,8 +236,10 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		colliding_foundations.append(parent)
 	elif "Depot" in parent.name and value == Enums.Value.KING:
 		var is_colliding: bool = true
-		for sibling in get_parent().get_children():
-			if sibling != self and depot == sibling.depot:
+		var card_nodes = get_tree().get_nodes_in_group("cards")
+		for i in range(0, card_nodes.size()):
+			var other_card = card_nodes[i] as Card
+			if other_card != self and parent == other_card.depot:
 				is_colliding = false
 				break
 		if is_colliding:
