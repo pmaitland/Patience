@@ -188,7 +188,7 @@ func trigger_dragging() -> bool:
 		and !Globals.dragging_card
 		
 func can_pile_in_depot(card: Node2D) -> bool:
-	return card.depot != null and card.face_up and card.value == value + 1 and (card.suit == (suit + 1) % 4 or card.suit == (suit + 3) % 4)
+	return card.depot != null and card.child_card == null and card.face_up and card.value == value + 1 and ((is_black() and card.is_red()) or (is_red() and card.is_black()))
 	
 func can_pile_in_foundation(card: Node2D) -> bool:
 	return card.foundation != null and card.face_up and child_card == null and card.value == value - 1 and card.suit == suit
