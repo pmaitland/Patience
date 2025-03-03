@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dlkatdxwl8l3o"]
+[gd_scene load_steps=13 format=3 uid="uid://dlkatdxwl8l3o"]
 
 [ext_resource type="Script" path="res://scripts/klondike.gd" id="1_25p4o"]
 [ext_resource type="PackedScene" uid="uid://ds7iby3eabein" path="res://scenes/card.tscn" id="2_iahgv"]
@@ -9,6 +9,7 @@
 [ext_resource type="Shader" path="res://shaders/card_outline.gdshader" id="7_78so3"]
 [ext_resource type="Texture2D" uid="uid://jik83oawusda" path="res://sprites/card/outline.png" id="7_ib0m3"]
 [ext_resource type="Texture2D" uid="uid://bbv6ihpl6s1yx" path="res://sprites/table.png" id="9_q378k"]
+[ext_resource type="Texture2D" uid="uid://c55i5fjlmf8kb" path="res://sprites/card/refresh.png" id="10_5dv6d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5vfgr"]
 shader = ExtResource("7_78so3")
@@ -87,6 +88,11 @@ script = ExtResource("6_nj7t5")
 texture_filter = 1
 material = SubResource("ShaderMaterial_5vfgr")
 texture = ExtResource("7_ib0m3")
+
+[node name="RefreshSprite" type="Sprite2D" parent="Stock"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_5vfgr")
+texture = ExtResource("10_5dv6d")
 
 [node name="Area2D" type="Area2D" parent="Stock"]
 scale = Vector2(2.5, 3.5)
