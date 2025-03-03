@@ -87,6 +87,7 @@ func _process(_delta: float) -> void:
 				free_parent()
 				var new_position = colliding_depots[0].global_position
 				depot = colliding_depots[0]
+				depot.find_child("OutlineSprite").material.set_shader_parameter('width', 0)
 				foundation = null
 				check_moved_from_waste()
 				global_position = new_position
@@ -109,6 +110,13 @@ func _process(_delta: float) -> void:
 				colliding_foundations[i].find_child("OutlineSprite").material.set_shader_parameter('color', Colors.CARD_OUTLINE)
 			else:
 				colliding_foundations[i].find_child("OutlineSprite").material.set_shader_parameter('width', 0)
+				
+		for i in range(colliding_depots.size()):
+			if i == 0:
+				colliding_depots[i].find_child("OutlineSprite").material.set_shader_parameter('width', 3)
+				colliding_depots[i].find_child("OutlineSprite").material.set_shader_parameter('color', Colors.CARD_OUTLINE)
+			else:
+				colliding_depots[i].find_child("OutlineSprite").material.set_shader_parameter('width', 0)
 		
 	last_mouse_position = current_mouse_position
 	
@@ -234,25 +242,35 @@ func _on_small_area_mouse_exited() -> void:
 		small_area_has_mouse = false
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.name == "SmallArea": return
 	if !being_dragged: return
 	var parent: Node2D = area.get_parent()
 	if "Card" in parent.name and (can_pile_in_depot(parent) or can_pile_in_foundation(parent)):
 		colliding_cards.append(parent)
 		parent.is_target = true
 	elif "Foundation" in parent.name and value == Enums.Value.ACE:
-		colliding_foundations.append(parent)
+		var other_card_present: bool = false
+		var card_nodes = get_tree().get_nodes_in_group("cards")
+		for i in range(0, card_nodes.size()):
+			var other_card = card_nodes[i] as Card
+			if other_card != self and parent == other_card.foundation:
+				other_card_present = true
+				break
+		if !other_card_present:
+			colliding_foundations.append(parent)
 	elif "Depot" in parent.name and value == Enums.Value.KING:
-		var is_colliding: bool = true
+		var other_card_present: bool = false
 		var card_nodes = get_tree().get_nodes_in_group("cards")
 		for i in range(0, card_nodes.size()):
 			var other_card = card_nodes[i] as Card
 			if other_card != self and parent == other_card.depot:
-				is_colliding = false
+				other_card_present = true
 				break
-		if is_colliding:
+		if !other_card_present:
 			colliding_depots.append(parent)
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
+	if area.name == "SmallArea": return
 	var parent: Node2D = area.get_parent()
 	if parent in colliding_cards:
 		colliding_cards.remove_at(colliding_cards.find(parent))
@@ -262,3 +280,4 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 		parent.find_child("OutlineSprite").material.set_shader_parameter('width', 0)
 	elif parent in colliding_depots:
 		colliding_depots.remove_at(colliding_depots.find(parent))
+		parent.find_child("OutlineSprite").material.set_shader_parameter('width', 0)

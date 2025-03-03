@@ -54,6 +54,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	for foundation: Node2D in find_child("Foundations").get_children():
 		foundation.find_child("OutlineSprite").material.set_shader_parameter('width', 0)
+	for depot: Node2D in find_child("Depots").get_children():
+		depot.find_child("OutlineSprite").material.set_shader_parameter('width', 0)
 
 func _on_reset_button_down() -> void:
 	get_tree().reload_current_scene()
