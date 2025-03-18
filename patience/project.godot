@@ -23,7 +23,8 @@ Colors="*res://scripts/colors.gd"
 
 [display]
 
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
+window/stretch/scale_mode="integer"
 
 [importer_defaults]
 
